@@ -1,0 +1,7 @@
+Approach,MEL→Excise,NV→Excise (over-treat),AKIEC→Local (correct)
+Naive SL (ours),0.48,0.02,0.58
+Naive SL (paper Fig 2f),0.64,0.07,0.81
+Threshold-SL (ours),0.60,0.05,0.35
+Threshold-SL (paper Fig 2g),0.93,0.22,0.63
+RL DQN (ours),0.56,0.02,0.48
+RL DQN (paper Fig 2h),0.78,0.13,0.67

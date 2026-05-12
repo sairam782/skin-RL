@@ -10,6 +10,7 @@ The project was refactored from a notebook into a small Python codebase:
 - `paper_demos/` contains the paper-style TensorFlow/Gym demo scripts for diagnosis, lesion-level management, and patient-level management.
 - `data/` contains the included HAM10000 vector data used by the refactored DQN workflow.
 - `management/` contains management comparison plotting scripts and the saved training log.
+- `plots/` contains exported diagnosis and management result plots in PNG/PDF form.
 - `requirements.txt` lists the Python dependencies.
 
 This project also references the original paper codebase:
@@ -109,6 +110,8 @@ After training, the script prints:
 - epoch accuracy
 - confusion matrix
 - classification report
+
+Saved result plots are available in `plots/`, including diagnosis confusion matrices, management confusion matrices, reward curves, and summary figures.
 
 ## Notes
 
