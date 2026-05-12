@@ -7,7 +7,11 @@ The project was refactored from a notebook into a small Python codebase:
 - `dqn.py` contains the standard DQN network.
 - `duelingdqn.py` contains the Dueling DQN network.
 - `main.py` handles data loading, environment setup, training, evaluation, and optional plotting.
+- `paper_demos/` contains the paper-style TensorFlow/Gym demo scripts for diagnosis, lesion-level management, and patient-level management.
 - `requirements.txt` lists the Python dependencies.
+
+This project also references the original paper codebase:
+[catarina-barata/Skin_RL](https://github.com/catarina-barata/Skin_RL).
 
 ## Setup
 
@@ -57,6 +61,24 @@ Use reward-only bandit-style targets:
 ```bash
 python main.py --model dueling --epochs 30 --bandit
 ```
+
+## Paper Demos
+
+The `paper_demos/` folder contains the three demo scripts from the paper workflow:
+
+- `RL_Skin_Cancer_Demo_Diagnosis.py`
+- `RL_Skin_Cancer_Demo_Management.py`
+- `Skin_Cancer_RL_Demo_Patient_Management.py`
+
+Example commands:
+
+```bash
+python paper_demos/RL_Skin_Cancer_Demo_Diagnosis.py --n_patients 100 --n_episodes 150 --use_unknown False
+python paper_demos/RL_Skin_Cancer_Demo_Management.py --n_patients 100 --n_episodes 150 --n_actions 2
+python paper_demos/Skin_Cancer_RL_Demo_Patient_Management.py --n_patients 1 --n_episodes 130 --n_actions 3
+```
+
+These scripts expect the paper demo data files under a `data/` folder, following the original repository format.
 
 ## Outputs
 
