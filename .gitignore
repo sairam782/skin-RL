@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.ipynb_checkpoints/
+
+# Large local datasets and model artifacts
+*.npy
+*.pt
+*.pth
+*.ckpt
