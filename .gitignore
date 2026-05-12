@@ -5,6 +5,7 @@ __pycache__/
 
 # Large local datasets and model artifacts
 *.npy
+!data/nmed_rn34_ham10k_vectors.npy
 *.pt
 *.pth
 *.ckpt

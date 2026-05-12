@@ -8,6 +8,8 @@ The project was refactored from a notebook into a small Python codebase:
 - `duelingdqn.py` contains the Dueling DQN network.
 - `main.py` handles data loading, environment setup, training, evaluation, and optional plotting.
 - `paper_demos/` contains the paper-style TensorFlow/Gym demo scripts for diagnosis, lesion-level management, and patient-level management.
+- `data/` contains the included HAM10000 vector data used by the refactored DQN workflow.
+- `management/` contains management comparison plotting scripts and the saved training log.
 - `requirements.txt` lists the Python dependencies.
 
 This project also references the original paper codebase:
@@ -21,6 +23,13 @@ pip install -r requirements.txt
 
 ## Data
 
+The repo includes:
+
+```text
+data/nmed_rn34_ham10k_vectors.npy
+data/vectorDB.csv
+```
+
 By default, `main.py` uses the original Kaggle paths from the notebook:
 
 ```text
@@ -32,8 +41,8 @@ For local data, pass custom paths:
 
 ```bash
 python main.py \
-  --feature-path /path/to/nmed_rn34_ham10k_vectors.npy \
-  --csv-path /path/to/vectorDB.csv
+  --feature-path data/nmed_rn34_ham10k_vectors.npy \
+  --csv-path data/vectorDB.csv
 ```
 
 ## Train
@@ -79,6 +88,18 @@ python paper_demos/Skin_Cancer_RL_Demo_Patient_Management.py --n_patients 1 --n_
 ```
 
 These scripts expect the paper demo data files under a `data/` folder, following the original repository format.
+
+## Management Plots
+
+The `management/` folder contains plotting helpers for the lesion-level management replication:
+
+```bash
+cd management
+python plot_management_comparison.py
+python plot_management_separate.py
+```
+
+The scripts read `training_log.txt` and expect baseline result files in the same working directory when generating comparison plots.
 
 ## Outputs
 
