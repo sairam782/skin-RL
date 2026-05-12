@@ -11,24 +11,11 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 from dqn import QNetwork
 from duelingdqn import DuelingQNetwork
-
-
-REWARD_MATRIX = np.array(
-    [
-        [2, -2, -3, -3, -2, -3, -3],
-        [-2, 3, -4, -4, -2, -4, -4],
-        [-2, -2, 1, -2, -3, -2, -2],
-        [-2, -2, -2, 1, -3, -2, -2],
-        [-8, -7, -10, -10, 5, -12, -10],
-        [-2, -2, -2, -2, -3, 1, -2],
-        [-2, -2, -2, -2, -3, -2, 1],
-    ],
-    dtype=np.float32,
-)
+from reward_matrices import REWARD_MATRIX_NAMES, get_reward_matrix
 
 
 class SkinCancerEnv:
-    def __init__(self, states, labels, reward_matrix=REWARD_MATRIX):
+    def __init__(self, states, labels, reward_matrix):
         self.states = states
         self.labels = labels
         self.reward_matrix = reward_matrix
@@ -301,6 +288,13 @@ def parse_args():
     parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--max-memory", type=int, default=10000)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument(
+        "--reward-matrix",
+        type=int,
+        default=1,
+        choices=sorted(REWARD_MATRIX_NAMES),
+        help="Reward matrix id to use, from 1 to 25.",
+    )
     parser.add_argument("--no-normalize", action="store_true")
     parser.add_argument("--bandit", action="store_true", help="Use reward-only target without bootstrapping.")
     parser.add_argument("--plot", action="store_true")
@@ -331,7 +325,10 @@ def main():
     target_model = create_model(args.model, input_dim, feature_dim, prob_dim, num_actions, device)
     target_model.load_state_dict(model.state_dict())
 
-    env = SkinCancerEnv(states, labels)
+    reward_matrix = get_reward_matrix(args.reward_matrix)
+    print(f"Reward matrix: {args.reward_matrix} - {REWARD_MATRIX_NAMES[args.reward_matrix]}")
+
+    env = SkinCancerEnv(states, labels, reward_matrix)
     reward_history, loss_history, accuracy_history = train(
         model,
         target_model,

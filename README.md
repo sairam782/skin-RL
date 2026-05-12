@@ -7,6 +7,7 @@ The project was refactored from a notebook into a small Python codebase:
 - `dqn.py` contains the standard DQN network.
 - `duelingdqn.py` contains the Dueling DQN network.
 - `main.py` handles data loading, environment setup, training, evaluation, and optional plotting.
+- `reward_matrices.py` contains 25 reward matrix variations for skin cancer RL experiments.
 - `paper_demos/` contains the paper-style TensorFlow/Gym demo scripts for diagnosis, lesion-level management, and patient-level management.
 - `data/` contains the included HAM10000 vector data used by the refactored DQN workflow.
 - `management/` contains management comparison plotting scripts and the saved training log.
@@ -70,6 +71,23 @@ Use reward-only bandit-style targets:
 
 ```bash
 python main.py --model dueling --epochs 30 --bandit
+```
+
+## Reward Matrices
+
+`reward_matrices.py` includes 25 reward matrix variations, including Moderate, Aggressive, and Extreme settings. Select one at runtime:
+
+```bash
+python main.py --model dueling --reward-matrix 3 --epochs 30
+```
+
+In Python:
+
+```python
+from reward_matrices import get_reward_matrix, list_reward_matrices
+
+matrix = get_reward_matrix(1)
+available = list_reward_matrices()
 ```
 
 ## Paper Demos
